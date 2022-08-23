@@ -1,0 +1,38 @@
+version: 2.23.3
+services:
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app/
+    environment:
+      - DJANGO_SETTINGS_MODULE=workshop.settings_dev_docker
+      - POSTGRES_DB: workshopdb
+      - POSTGRES_USER: workshopuser
+      - POSTGRES_PASSWORD: haslohaslo123
+      - POSTGRES_HOST: localhost
+
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+
+    restart: on-failure
+
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_DB: workshopdb
+      POSTGRES_USER: workshopuser
+      POSTGRES_PASSWORD: haslohaslo123
+      POSTGRES_HOST: localhost
+    volumes:
+      - ./db:/db
+
+
+
+
+
+

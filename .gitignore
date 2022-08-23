@@ -1,0 +1,9 @@
+db.sqlite3
+__pycache__
+venv
+.idea/
+.DS_Store
+nginx/.DS_Store
+geckodriver.log
+.env
+cmds.txt

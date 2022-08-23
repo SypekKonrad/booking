@@ -1,0 +1,5 @@
+Hi {{ user }}
+Click the link below to activate your account:
+
+{{ domain }}{% url 'acc_activation' uidb64=uid token=token %}
+

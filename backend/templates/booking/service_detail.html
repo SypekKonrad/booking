@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %} Details {% endblock %}
+
+{% block content %}
+
+<table class="table">
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Make</th>
+      <td>{{service_detail.make}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Model</th>
+      <td>{{service_detail.model}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Body Type</th>
+      <td>{{service_detail.body_type}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Production Year</th>
+      <td>{{service_detail.production_year}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Fuel Type</th>
+      <td>{{service_detail.fuel_type}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Engine Displacement</th>
+      <td>{{service_detail.engine_displacement}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Transmission</th>
+      <td>{{service_detail.transmission}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Horsepower</th>
+      <td>{{service_detail.horsepower}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Service</th>
+      <td>{{service_detail.service}}</td>
+    </tr>
+
+
+  </tbody>
+</table>
+
+{#<table class="table">#}
+{#  <thead>#}
+{#    <tr>#}
+{#      <th scope="col">Make</th>#}
+{#      <th scope="col">Model</th>#}
+{#      <th scope="col">Body Type</th>#}
+{#      <th scope="col">Production Year</th>#}
+{#      <!-- Add more columns as needed -->#}
+{#    </tr>#}
+{#  </thead>#}
+{#  <tbody>#}
+{#    {% for x in service_detail %}#}
+{#      <tr>#}
+{#        <td>{{ service_detail.make }}</td>#}
+{#        <td>{{ service_detail.model }}</td>#}
+{#        <td>{{ service_detail.body_type }}</td>#}
+{#        <td>{{ service_detail.production_year }}</td>#}
+{#      </tr>#}
+{#    {% endfor %}#}
+{#  </tbody>#}
+{#</table>#}
+{##}
+
+
+
+
+
+
+
+{% endblock %}

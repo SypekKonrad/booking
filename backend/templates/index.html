@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+{% csrf_token %}
+
+{% block title %} Welcome to my workshop webpage {% endblock %}
+
+{% block content %}
+
+    <h1>Mobile Mechanic Assistance Platform</h1>
+
+    <h2>Key Features</h2>
+        <ul>
+            <li><strong>User Authentication:</strong> Leverage the power of Django's `django.contrib.auth` for robust user authentication, including account activation and password reset functionalities.</li>
+            <li><strong>Request Assistance:</strong> Users can easily request assistance by filling out a form containing their contact details and vehicle information. This initiates a service request for a mobile mechanic to fix their car.</li>
+            <li><strong>Efficient Communication:</strong> The application sends activation emails and password reset links to users, ensuring secure account access and a streamlined user experience.</li>
+            <li><strong>Bootstrap-Powered Frontend:</strong> The frontend is designed with Bootstrap, providing a responsive and visually appealing interface for users to interact with the platform.</li>
+        </ul>
+
+    <h2>Technology Stack</h2>
+        <ul>
+            <li><strong>Backend:</strong> Django web framework</li>
+            <li><strong>Containerization:</strong> Docker</li>
+            <li><strong>Cloud Hosting:</strong> AWS</li>
+        </ul>
+
+    <h2>What is This Project?</h2>
+        <p>This project showcases my proficiency in building end-to-end web applications using industry-standard technologies. From secure user authentication to facilitating real-world service requests, this platform highlights my skills in full-stack development, containerization, and cloud hosting.</p>
+        <p>Explore the various features and functionalities of this project to witness the seamless integration of Django's capabilities with modern web design principles.</p>
+        <p>Feel free to reach out for more details or to discuss how this project aligns with your unique requirements.</p>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+version: 2.23.3
+services:
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app/
+    environment:
+      - DJANGO_SETTINGS_MODULE=workshop.settings_prod_docker
+    env_file: .env
+    networks:
+      - app
+    ports:
+      - "8000:8000"
+    image: app:django
+
+    restart: on-failure
+
+  db:
+    image: postgres:12
+    env_file: .env
+    environment:
+      POSTGRES_DB: workshopdb
+      POSTGRES_USER: workshopuser
+      POSTGRES_PASSWORD: haslohaslo123
+      POSTGRES_HOST: localhost
+    volumes:
+      - ./db:/db
+#    ports:
+#      - "5432:5432"
+    networks:
+      - app
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "workshopdb", "-U", "workshopuser" ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+  nginx:
+    build: ./nginx
+    restart: on-failure
+    ports:
+      [ 80:80 ]
+    volumes:
+    - ./nginx:/nginx
+    networks:
+      - app
+    depends_on:
+      - app
+networks:
+  app:
+     driver: bridge
+
+

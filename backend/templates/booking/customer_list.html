@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Customers {% endblock %}
+
+
+{% block content %}
+{% for customer in customer_list %}
+<div style='margin-top:10px;'>
+    <form method='POST'>
+        {% csrf_token %}
+    <p><a href="{%url 'details' customer.vehicle.id %}">{{customer.first_name}} {{customer.surname}} {{customer.email}} {{customer.phone_number}} {{customer.timestamp|date:"SHORT_DATE_FORMAT" }}</a></p>
+    </form>
+</div>
+{% endfor %}
+
+
+{% endblock %}

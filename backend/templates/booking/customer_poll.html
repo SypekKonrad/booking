@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+    <div class="container" >
+{% block title %} Form {% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'poll' %}" id="app">
+
+
+        {% csrf_token %}
+        {{ form1.non_field_errors }}
+        {{ form2.non_field_errors }}
+        <div class="mb-3">
+            {{ form1.first_name.errors }}
+          <label for="{{ form1.first_name.id_for_label }}" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="{{form1.first_name.id_for_label}}" name="{{form1.first_name.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form1.surname.errors }}
+          <label for="{{ form1.surname.id_for_label }}" class="form-label">Surname</label>
+          <input type="text" class="form-control" id="{{form1.surname.id_for_label}}" name="{{form1.surname.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form1.phone_number.errors }}
+          <label for="{{ form1.phone_number.id_for_label }}" class="form-label">phone number</label>
+          <input type="text" class="form-control" id="{{form1.phone_number.id_for_label}}" name="{{form1.phone_number.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form1.email.errors }}
+          <label for="{{ form1.email.id_for_label }}" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="{{form1.email.id_for_label}}" name="{{form1.email.html_name}}">
+        </div>
+
+            <div class="mb-3" ><fetch-select label="make" v-bind:objects="makes" ></fetch-select></div> <!--przekazac propsy z apki vue, np."items=makes"-->
+
+<!--        <div class="mb-3">-->
+
+<!--            {{ form2.make.errors }}-->
+<!--          <label for="{{ form.make.id_for_label }}" class="form-label">make</label>-->
+<!--          <input type="text" class="form-control" id="{{form.make.id_for_label}}" name="{{form.make.html_name}}">-->
+<!--        </div>-->
+
+            <div class="mb-3" ><fetch-select label="model" v-bind:objects="models" ></fetch-select></div>
+            <span>{{make_id}}</span>
+        <!-- <div class="mb-3">
+            {{ form2.model.errors }}
+          <label for="{{ form2.model.id_for_label }}" class="form-label">model</label>
+          <input type="text" class="form-control" id="{{form2.model.id_for_label}}" name="{{form2.model.html_name}}">
+        </div> -->
+        <div class="mb-3">
+            {{ form2.body_type.errors }}
+          <label for="{{ form2.body_type.id_for_label }}" class="form-label" >body type</label>
+          <input type="text" class="form-control" id="{{form2.body_type.id_for_label}}" name="{{form2.body_type.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form2.production_year.errors }}
+          <label for="{{ form2.production_year.id_for_label }}" class="form-label">production year</label>
+          <input type="number" class="form-control" id="{{form2.production_year.id_for_label}}" name="{{form2.production_year.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form2.fuel_type.errors }}
+          <label for="{{ form2.fuel_type.id_for_label }}" class="form-label">fuel type</label>
+          <input type="text" class="form-control" id="{{form2.fuel_type.id_for_label}}" name="{{form2.fuel_type.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form2.engine_displacement.errors }}
+          <label for="{{ form.engine_displacement.id_for_label }}" class="form-label">engine displacement</label>
+          <input type="number" class="form-control" id="{{form2.engine_displacement.id_for_label}}" name="{{form2.engine_displacement.html_name}}" >
+        </div>
+        <div class="mb-3">
+            {{ form2.transmission.errors }}
+          <label for="{{ form2.transmission.id_for_label }}" class="form-label">transmission</label>
+          <input type="text" class="form-control" id="{{form2.transmission.id_for_label}}" name="{{form2.transmission.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form2.horsepower.errors }}
+          <label for="{{ form2.horsepower.id_for_label }}" class="form-label">horsepower</label>
+          <input type="number" class="form-control" id="{{form2.horsepower.id_for_label}}" name="{{form2.horsepower.html_name}}" >
+        </div>
+        <div class="mb-3">
+            {{ form2.service.errors }}
+          <label for="{{ form2.service.id_for_label }}" class="form-label">service</label>
+          <input type="text" class="form-control" id="{{form2.service.id_for_label}}" name="{{form2.service.html_name}}">
+        </div>
+
+        <button type="submit" class="btn">Send</button>
+
+
+
+    </form>
+
+<!--        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>-->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+        {% verbatim %}
+<script>
+
+    Vue.component("fetch-select", {
+        props: ["label", "objects", ],
+        template: `
+        <div>
+            <label for="object-select" class="form-label">{{ label }}</label>
+            <div class="dropdown">
+                <input type="text" class="form-control dropdown-toggle" id="object-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-on:input="inputHandler" v-model="userInput" autocomplete="off" :name="label"></input>
+                <div class="dropdown-menu" aria-labelledby="make-select">
+                    <a class="dropdown-item" v-for="object in filteredObjects" v-on:click="dropdownItemClickHandler">{{ object.name }}</a>
+
+                </div>
+            </div>
+        </div>`,
+
+        created: function() {
+          this.filteredObjects = this.objects
+        },
+
+        data: function() {
+            
+         
+            return {
+                
+                filteredObjects: [],
+                userInput: ""
+            }
+        },
+        
+        methods: {
+            
+            inputHandler(event) {
+              this.filteredObjects = []
+              for (object of this.objects) {
+                if(object.name.toUpperCase().includes(this.userInput.toUpperCase())) {
+                  this.filteredObjects.push(object)
+                }
+              }
+            },
+            dropdownItemClickHandler(event) {
+              console.log(event.target.textContent)
+              this.filteredObjects = []
+              
+              this.userInput = event.target.textContent
+              $('.dropdown-toggle').dropdown()
+
+
+            }
+            
+        }
+    })
+
+var app = new Vue({
+  el:'#app',
+  data: {
+    
+    makes: [], //fetch api musi tu zapisac dane
+    models: [],
+    make_id: null
+    
+    
+  },
+  created: function() {
+           
+    fetch("/api/makes/")
+        .then((response) => response.json())
+        .then((response_data) => {
+            console.log(response_data);
+            this.makes = response_data;
+            
+        });
+    
+    fetch("/api/models/")
+      .then((response) => response.json())
+      .then((response_data) => {
+          console.log(response_data);
+          this.models = response_data;
+          
+      });
+            
+  }
+
+  
+})
+        </script>
+        {% endverbatim %}
+
+{% endblock %}
+    </div>
+

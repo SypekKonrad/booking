@@ -1,27 +1,45 @@
 <html>
+<head>
+    <title>Customer's Poll</title>
+</head>
 
 <body>
+    <h1>Please insert requested data</h1>
 
-<h1>Please insert requested data</h1>
+
+    <form method="" action="POST">
 
 
-<form method="" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <fieldset>
+            <legend>Personal Information:</legend>
+            <ol><input type="text" name="First_name"/></ol>
+            <ol><input type="text" name="Sur_name"/></ol>
+            <ol><input type="text" name="phone_number"/></ol>
+            <ol><input type="text" name="email"/></ol>
+        </fieldset>
+        <fieldset>
+            <legend>Vehicle Information:</legend>
+            <ol><input type="text" name="make"/></ol>
+            <ol><input type="text" name="model"/></ol>
+            <ol><input type="text" name="body_type"/></ol>
+            <ol><input type="text" name="production_year"/></ol>
+            <ol><input type="text" name="fuel_type"/></ol>
+            <ol><input type="text" name="engine_displacement"/></ol>
+            <ol><input type="text" name="transmission"/></ol>
+            <ol><input type="text" name="horsepower"/></ol>
+        </fieldset>
+        <fieldset>
+            <legend>Service Information:</legend>
+            <ol><input type="text" name="service"/></ol>
 
-    <input type="text" name="First_name"/>
-    <input type="text" name="Sur_name"/>
-    <input type="text" name="phone_number"/>
-    <input type="text" name="make"/>
-    <input type="text" name="model"/>
-    <input type="text" name="body_type"/>
-    <input type="text" name="production_year"/>
-    <input type="text" name="fuel_type"/>
-    <input type="text" name="engine_displacement"/>
-    <input type="text" name="transmission"/>
-    <input type="text" name="horsepower"/>
-
+        </fieldset>
 
     <input type='submit' value='send' class='btn' />
-</form>
+
+    </form>
+
 </body>
 
 </html>

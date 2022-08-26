@@ -5,6 +5,7 @@ class Customer(models.Model):
     surname = models.CharField(max_length=20)
     email = models.EmailField()
     phone_number = models.CharField(max_length=9)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 class Vehicle(models.Model):
     make = models.CharField(max_length=20)

@@ -7,31 +7,44 @@
     <h1>Please insert requested data</h1>
 
 
-    <form method="" action="POST">
+    <form method="post" action="/poll/">
 
 
         {% csrf_token %}
         {{ form.as_p }}
         <fieldset>
             <legend>Personal Information:</legend>
-            <ol><input type="text" name="First_name"/></ol>
-            <ol><input type="text" name="Sur_name"/></ol>
+            <ol><label for="First_Name">First Name:</label></ol>
+            <ol><input type="text" name="First_Name"/></ol>
+            <ol><label for="Sur_Name">Sur Name:</label></ol>
+            <ol><input type="text" name="Sur_Name"/></ol>
+            <ol><label for="phone_number">phone number:</label></ol>
             <ol><input type="text" name="phone_number"/></ol>
+            <ol><label for="email">email:</label></ol>
             <ol><input type="text" name="email"/></ol>
         </fieldset>
         <fieldset>
             <legend>Vehicle Information:</legend>
+            <ol><label for="make">make :</label></ol>
             <ol><input type="text" name="make"/></ol>
+            <ol><label for="model">model:</label></ol>
             <ol><input type="text" name="model"/></ol>
+            <ol><label for="body_type">body type:</label></ol>
             <ol><input type="text" name="body_type"/></ol>
+            <ol><label for="production_year">production year:</label></ol>
             <ol><input type="text" name="production_year"/></ol>
+            <ol><label for="fuel_type">fuel type:</label></ol>
             <ol><input type="text" name="fuel_type"/></ol>
+            <ol><label for="engine_displacement">engine displacement:</label></ol>
             <ol><input type="text" name="engine_displacement"/></ol>
+            <ol><label for="transmission">transmission:</label></ol>
             <ol><input type="text" name="transmission"/></ol>
+            <ol><label for="horsepower">horsepower:</label></ol>
             <ol><input type="text" name="horsepower"/></ol>
         </fieldset>
         <fieldset>
             <legend>Service Information:</legend>
+            <ol><label for="service">service:</label></ol>
             <ol><input type="text" name="service"/></ol>
 
         </fieldset>

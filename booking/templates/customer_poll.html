@@ -1,58 +1,96 @@
+<!doctype html>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>Customer's Poll</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
+    <div class="container">
+
     <h1>Please insert requested data</h1>
 
 
-    <form method="post" action="/poll/">
+    <form method="post" action="{%url 'poll'%}">
 
 
         {% csrf_token %}
-        {{ form.as_p }}
-        <fieldset>
-            <legend>Personal Information:</legend>
-            <ol><label for="First_Name">First Name:</label></ol>
-            <ol><input type="text" name="First_Name"/></ol>
-            <ol><label for="Sur_Name">Sur Name:</label></ol>
-            <ol><input type="text" name="Sur_Name"/></ol>
-            <ol><label for="phone_number">phone number:</label></ol>
-            <ol><input type="text" name="phone_number"/></ol>
-            <ol><label for="email">email:</label></ol>
-            <ol><input type="text" name="email"/></ol>
-        </fieldset>
-        <fieldset>
-            <legend>Vehicle Information:</legend>
-            <ol><label for="make">make :</label></ol>
-            <ol><input type="text" name="make"/></ol>
-            <ol><label for="model">model:</label></ol>
-            <ol><input type="text" name="model"/></ol>
-            <ol><label for="body_type">body type:</label></ol>
-            <ol><input type="text" name="body_type"/></ol>
-            <ol><label for="production_year">production year:</label></ol>
-            <ol><input type="text" name="production_year"/></ol>
-            <ol><label for="fuel_type">fuel type:</label></ol>
-            <ol><input type="text" name="fuel_type"/></ol>
-            <ol><label for="engine_displacement">engine displacement:</label></ol>
-            <ol><input type="text" name="engine_displacement"/></ol>
-            <ol><label for="transmission">transmission:</label></ol>
-            <ol><input type="text" name="transmission"/></ol>
-            <ol><label for="horsepower">horsepower:</label></ol>
-            <ol><input type="text" name="horsepower"/></ol>
-        </fieldset>
-        <fieldset>
-            <legend>Service Information:</legend>
-            <ol><label for="service">service:</label></ol>
-            <ol><input type="text" name="service"/></ol>
+<!--        {{ form.as_table }}-->
+        {{ form.non_field_errors }}
+        <div class="mb-3">
+            {{ form.first_name.errors }}
+          <label for="{{ form.first_name.id_for_label }}" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="{{form.first_name.id_for_label}}" name="{{form.first_name.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.surname.errors }}
+          <label for="{{ form.surname.id_for_label }}" class="form-label">Surname</label>
+          <input type="text" class="form-control" id="{{form.sur_name.id_for_label}}" name="{{form.sur_name.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.phone_number.errors }}
+          <label for="{{ form.phone_number.id_for_label }}" class="form-label">phone number</label>
+          <input type="text" class="form-control" id="{{form.phone_number.id_for_label}}" name="{{form.phone_number.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.email.errors }}
+          <label for="{{ form.email.id_for_label }}" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="{{form.email.id_for_label}}" name="{{form.email.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.make.errors }}
+          <label for="{{ form.make.id_for_label }}" class="form-label">make</label>
+          <input type="text" class="form-control" id="{{form.make.id_for_label}}" name="{{form.make.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.model.errors }}
+          <label for="{{ form.model.id_for_label }}" class="form-label">model</label>
+          <input type="text" class="form-control" id="{{form.model.id_for_label}}" name="{{form.model.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.body_type.errors }}
+          <label for="{{ form.body_type.id_for_label }}" class="form-label">body type</label>
+          <input type="text" class="form-control" id="{{form.body_type.id_for_label}}" name="{{form.body_type.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.production_year.errors }}
+          <label for="{{ form.production_year.id_for_label }}" class="form-label">production year</label>
+          <input type="number" class="form-control" id="{{form.production_year.id_for_label}}" name="{{form.production_year.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.fuel_type.errors }}
+          <label for="{{ form.fuel_type.id_for_label }}" class="form-label">fuel type</label>
+          <input type="text" class="form-control" id="{{form.fuel_type.id_for_label}}" name="{{form.fuel_type.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.engine_displacement.errors }}
+          <label for="{{ form.engine_displacement.id_for_label }}" class="form-label">engine displacement</label>
+          <input type="number" class="form-control" id="{{form.engine_displacement.id_for_label}}" name="{{form.engine_displacement.html_name}}" >
+        </div>
+        <div class="mb-3">
+            {{ form.transmission.errors }}
+          <label for="{{ form.transmission.id_for_label }}" class="form-label">transmission</label>
+          <input type="text" class="form-control" id="{{form.transmission.id_for_label}}" name="{{form.transmission.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.horsepower.errors }}
+          <label for="{{ form.horsepower.id_for_label }}" class="form-label">horsepower</label>
+          <input type="number" class="form-control" id="{{form.horsepower.id_for_label}}" name="{{form.horsepower.html_name}}" >
+        </div>
+        <div class="mb-3">
+            {{ form.service.errors }}
+          <label for="{{ form.service.id_for_label }}" class="form-label">service</label>
+          <input type="text" class="form-control" id="{{form.service.id_for_label}}" name="{{form.service.html_name}}">
+        </div>
 
-        </fieldset>
-
-    <input type='submit' value='send' class='btn' />
+        <button type="submit" class="btn">Send</button>
 
     </form>
 
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 
 </html>

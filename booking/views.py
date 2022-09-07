@@ -8,12 +8,14 @@ def index(request):
     return render(request, 'index.html')
 
 def customer_list(request):
-    template = customer_list.html
-    return render(request, template)
+    customer_list = Customer.objects.all()
+    return render(request, 'customer_list.html',
+                  {'customer_list': customer_list})
 
 def service_detail(request):
-    template = service_detail.html
-    return render(request, template)
+    service_detail = Vehicle.objects.all()
+    return render(request, 'service_detail.html',
+                  {'service_detail': service_detail})
 
 def customer_poll(request):
     if request.method == 'POST':

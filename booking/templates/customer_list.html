@@ -1,9 +1,13 @@
-<html>
+{% extends 'work.html' %}
 
-<body>
+{% block title %}
+<h1 class="pt-2 text-center">List of Customers</h1>
+{% endblock %}
 
-<h1>List of Customers</h1>
+{% block content %}
+{% for first_name in customer %}
+    <p> {{first_name}} </p>
+{% endfor %}
 
-</body>
 
-</html>
+{% endblock %}

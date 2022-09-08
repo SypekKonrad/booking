@@ -11,6 +11,10 @@ class Customer(models.Model):
 
     def __str__(self):
         return 'Customer ' + self.name
+    def get_full_name(self):
+        return self.first_name + "" + self.surname
+    def get_display_name(self):
+        return self.get_full_name()
 
 class Vehicle(models.Model):
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE)
@@ -23,6 +27,9 @@ class Vehicle(models.Model):
     transmission = models.CharField(max_length=20)
     horsepower = models.SmallIntegerField()
     service = models.TextField(blank=True)
+
+class Make(models.Model):
+    name = models.CharField(max_length=20)
 
 
 

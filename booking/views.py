@@ -2,18 +2,23 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import *
 from .models import *
+from django.contrib.auth.decorators import login_required
 
 def index(request):
 
     return render(request, 'index.html')
 
+@login_required
 def customer_list(request):
     customer_list = Customer.objects.all()
+    for c in customer_list:
+        print(c.get_display_name())
     return render(request, 'customer_list.html',
                   {'customer_list': customer_list})
 
-def service_detail(request):
-    service_detail = Vehicle.objects.all()
+@login_required
+def service_detail(request, vehicle_id):
+    service_detail = Vehicle.objects.get(id=vehicle_id)
     return render(request, 'service_detail.html',
                   {'service_detail': service_detail})
 
@@ -25,7 +30,7 @@ def customer_poll(request):
                 first_name=form.cleaned_data['first_name'],
                 surname=form.cleaned_data['surname'],
                 email=form.cleaned_data['email'],
-                phone_number=form.cleaned_data['phone number']
+                phone_number=form.cleaned_data['phone_number']
             )
             vehicle = Vehicle.objects.create(
                 customer=customer,
@@ -48,6 +53,8 @@ def customer_poll(request):
         form = CustomerPollForm()
 
     return render(request,'customer_poll.html', {'form': form})
+
+
 
 
 

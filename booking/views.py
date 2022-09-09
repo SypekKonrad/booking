@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 
 def index(request):
 
@@ -55,15 +56,23 @@ def customer_poll(request):
     return render(request,'customer_poll.html', {'form': form})
 
 
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+        if user is None:
+            context = {"error": "Invalid username or password"}
+            return render(request, "login.html", context)
+    return render(request,"login.html", {})
+
+
+def logout_view(request):
+
+    return render(request,"login.html", {})
 
 
 
-# def vehicles(request, vehicle_id):
-#     return HttpResponse("You're looking at vehicles list %s." % vehicle_id)
-#
-# def services(request, service_id):
-#     return HttpResponse("You're looking at services list %s." % service_id)
+def reqgister_view(request):
 
-
-
-# Create your views here.
+    return render(request,"login.html", {})

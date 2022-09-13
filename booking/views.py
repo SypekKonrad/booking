@@ -1,14 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
 
     return render(request, 'index.html')
 
+@csrf_exempt
 @login_required
 def customer_list(request):
     customer_list = Customer.objects.all()
@@ -18,6 +20,7 @@ def customer_list(request):
                   {'customer_list': customer_list})
 
 @login_required
+@csrf_exempt
 def service_detail(request, vehicle_id):
     service_detail = Vehicle.objects.get(id=vehicle_id)
     return render(request, 'service_detail.html',
@@ -57,6 +60,8 @@ def customer_poll(request):
 
 
 def login_view(request):
+    # if request.user.is_authenticated:
+    #     return render(request, '/', {})
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -64,15 +69,20 @@ def login_view(request):
         if user is None:
             context = {"error": "Invalid username or password"}
             return render(request, "login.html", context)
+        login(request, user)
+        return redirect('list') #csrftoken
     return render(request,"login.html", {})
 
 
 def logout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect('logout')
 
-    return render(request,"login.html", {})
+    return render(request,"logout.html", {})
 
 
 
-def reqgister_view(request):
-
-    return render(request,"login.html", {})
+# def reqgister_view(request):
+#
+#     return render(request,"login.html", {})

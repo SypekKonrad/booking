@@ -42,10 +42,12 @@
 					{% if request.user.is_authenticated %}
 <!--					<a class="nav-item nav-link" href="{% url 'index' %}" target="_blank">Home</a>-->
 					<a class="nav-item nav-link" href="{% url 'customers' %}" target="_blank">List of Customers</a>
+					<a class="nav-item nav-link" href="{% url 'logout' %}" target="_blank">Logout</a>
 					{#<a class="nav-item nav-link" href="{% url 'details' %}" target="_blank">Details</a>#}
 					{% else %}
 
 					<a class="nav-item nav-link" href="{% url 'poll' %}" target="_blank">Poll</a>
+					<a class="nav-item nav-link" href="{% url 'login' %}" target="_blank">Login</a>
 					{#<a class="nav-item nav-link" href="{% url 'details' %}" target="_blank">Details</a>#}
 					{% endif %}
 

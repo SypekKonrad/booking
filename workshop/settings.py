@@ -52,13 +52,20 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'workshop.urls'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': ['templates'],
+        # 'APP_DIRS': True,
+
         'OPTIONS': {
+
+            "loaders": [
+                "django.template.loaders.filesystem.Loader",
+                "django.template.loaders.app_directories.Loader",
+            ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -101,6 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CSRF_TRUSTED_ORIGINS = [' http://127.0.0.1:8000/booking/list/']
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

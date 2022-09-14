@@ -70,14 +70,14 @@ def login_view(request):
             context = {"error": "Invalid username or password"}
             return render(request, "login.html", context)
         login(request, user)
-        return redirect('list') #csrftoken
+        return redirect('/booking/list') #csrftoken
     return render(request,"login.html", {})
 
 
 def logout_view(request):
     if request.method == "POST":
         logout(request)
-        return redirect('logout')
+        return redirect('/booking/logout/')
 
     return render(request,"logout.html", {})
 

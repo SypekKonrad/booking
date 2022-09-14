@@ -1,6 +1,7 @@
 from django.urls import path, include
 from django.contrib import admin, auth
 from booking import views, rest_views
+#from django.contrib.auth import views
 
 
 urlpatterns = [

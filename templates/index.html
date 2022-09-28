@@ -6,6 +6,23 @@
 <h1 class="pt-2 text-center">Welcome to my workshop webpage</h1>
 {% endblock %}
 
+{% block content %}
+<button type="button" class="btn btn-primary" onclick="add_to_navbar()">guzik</button>
+<script>
+    function add_to_navbar(){
+    var b = document.querySelector('div.navbar-nav');
+    var link = document.createElement('a');
+    link.setAttribute('href','link');
+    link.setAttribute('class','nav-item nav-link');
+    link.text='guzik';
+    b.appendChild(link);
+    }
+</script>
+{% endblock %}
+
+
+
+
 
 
 

@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+LOGIN_URL = '/booking/login/'
 
 INSTALLED_APPS = [
     'django.contrib.admin',

@@ -1,6 +1,12 @@
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, LiveServerTestCase
+from selenium.webdriver.common import keys
+from selenium.webdriver.common.by import By
+
 from booking.models import *
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
 
 class CustomerPollTestCase(TestCase):
     def test_form_erorrs(self):
@@ -87,6 +93,77 @@ class IndexTestCase(TestCase):
         response = self.client.get('/booking/')
         self.assertEqual(response.status_code, 200)
 
-class CustomerListTestCase(TestCase):
+# class CustomerListTestCase(TestCase):
+#     pass
+
+
+
+
+
+
+
+
+class CustomerPollTest(LiveServerTestCase):
+
+    def testpoll(self):
+
+        driver = webdriver.Firefox(executable_path=r'D:\geckodriver.exe')
+        driver.get('http://127.0.0.1:8000/booking/poll/')
+
+        # first_name = driver.find_element_by_name("first_name")
+        # surname = driver.find_element_by_name("surname")
+        #
+        # submit = driver.find_element_by_class_name("submit")
+
+        first_name = driver.find_element(By.NAME, "first_name")
+        surname = driver.find_element(By.NAME, "surname")
+        phone_number = driver.find_element(By.NAME, "phone_number")
+        email = driver.find_element(By.NAME, "email")
+        make = driver.find_element(By.NAME, "make")
+        model = driver.find_element(By.NAME, "model")
+        body_type = driver.find_element(By.NAME, "body_type")
+        production_year = driver.find_element(By.NAME, "production_year")
+        fuel_type = driver.find_element(By.NAME, "fuel_type")
+        engine_displacement = driver.find_element(By.NAME, "engine_displacement")
+        transmission = driver.find_element(By.NAME, "transmission")
+        horsepower = driver.find_element(By.NAME, "horsepower")
+        service = driver.find_element(By.NAME, "service")
+
+
+        submit = driver.find_element(By.CLASS_NAME, "btn")
+
+        first_name.send_keys('Lucas')
+        surname.send_keys('Zimmerman')
+        phone_number.send_keys('123456789')
+        email.send_keys('lucas.zimmerman@gmail.com')
+        make.send_keys('BMW')
+        model.send_keys('320i')
+        body_type.send_keys('sedan')
+        production_year.send_keys('2000')
+        fuel_type.send_keys('gasoline')
+        engine_displacement.send_keys('1991')
+        transmission.send_keys('automatic')
+        horsepower.send_keys('150')
+        service.send_keys('gearbox oil change')
+
+        submit.send_keys(Keys.RETURN)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Create your tests here.

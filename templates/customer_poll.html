@@ -41,19 +41,14 @@
           <input type="email" class="form-control" id="{{form.email.id_for_label}}" name="{{form.email.html_name}}">
         </div>
 
-            <div class="mb-3"><select id="make-select" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
+            <div class="mb-3" id="app"><fetch-select-make></fetch-select-make>
 </div>
-        <div class="mb-3">
+<!--        <div class="mb-3">-->
 
-            {{ form.make.errors }}
-          <label for="{{ form.make.id_for_label }}" class="form-label">make</label>
-          <input type="text" class="form-control" id="{{form.make.id_for_label}}" name="{{form.make.html_name}}">
-        </div>
+<!--            {{ form.make.errors }}-->
+<!--          <label for="{{ form.make.id_for_label }}" class="form-label">make</label>-->
+<!--          <input type="text" class="form-control" id="{{form.make.id_for_label}}" name="{{form.make.html_name}}">-->
+<!--        </div>-->
 
         <div class="mb-3">
             {{ form.model.errors }}
@@ -99,12 +94,60 @@
         <button type="submit" class="btn">Send</button>
 
     </form>
-        <script>
-            fetch("/booking/api/makes/")
-                .then((response) => response.json())
-                .then((response_data) => {console.log("test", response_data)});
+<!--        <script>-->
+<!--            fetch("/booking/api/makes/")-->
+<!--                .then((response) => response.json())-->
+<!--                .then((response_data) => {-->
+<!--                    console.log("test", response_data);-->
+<!--                    $( "#make-select option" ).add( '<option value="1234">One</option>' ).addClass( "widget" );-->
+<!--                    console.log($( "#make-select" ))-->
 
+<!--                });-->
+
+<!--        </script>-->
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
+        {% verbatim %}
+        <script>
+            Vue.component('fetch-select-make', {
+
+  template: `<div><label for="make-select" class="form-label">make</label>
+
+      <select id="make-select" class="form-select mb-3" aria-label=".form-select-lg example">
+      <option selected>Open this select menu</option>
+      <option value="" v-for="make in makes">{{ make.name }}</option>
+
+    </select></div>`,
+  data: function() {
+    let makes = []
+
+    return {
+        makes: makes
+<!--          { id: 0, text: 'Opel' },-->
+<!--          { id: 1, text: 'Volkswagen' },-->
+<!--          { id: 2, text: 'FSO' }-->
+
+    }
+  },
+  created: function() {
+    this.fetchdata()
+  },
+  methods: {
+      fetchdata() {
+          fetch("/booking/api/makes/")
+                        .then((response) => response.json())
+                        .then((response_data) => {
+                            console.log("test", response_data);
+                            this.makes = response_data;
+                        });
+          }
+  }
+})
+
+var app = new Vue({el:'#app'})
         </script>
+        {% endverbatim %}
+
 {% endblock %}
     </div>
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>-->

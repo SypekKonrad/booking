@@ -41,8 +41,7 @@
           <input type="email" class="form-control" id="{{form.email.id_for_label}}" name="{{form.email.html_name}}">
         </div>
 
-            <div class="mb-3" id="app"><fetch-select-make></fetch-select-make>
-</div>
+            <div class="mb-3" id="app"><fetch-select-make></fetch-select-make></div>
 <!--        <div class="mb-3">-->
 
 <!--            {{ form.make.errors }}-->
@@ -94,55 +93,65 @@
         <button type="submit" class="btn">Send</button>
 
     </form>
-<!--        <script>-->
-<!--            fetch("/booking/api/makes/")-->
-<!--                .then((response) => response.json())-->
-<!--                .then((response_data) => {-->
-<!--                    console.log("test", response_data);-->
-<!--                    $( "#make-select option" ).add( '<option value="1234">One</option>' ).addClass( "widget" );-->
-<!--                    console.log($( "#make-select" ))-->
-
-<!--                });-->
-
-<!--        </script>-->
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
         {% verbatim %}
-        <script>
-            Vue.component('fetch-select-make', {
+<script>
+    Vue.component("fetch-select-make", {
+        template: `
+        <div>
+            <label for="make-select" class="form-label">make</label>
+            <div class="dropdown">
+                <input type="text" class="form-control dropdown-toggle" id="make-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-on:input="inputHandler" v-model="userInput" autocomplete="off"></input>
+                <div class="dropdown-menu" aria-labelledby="make-select">
+                    <a class="dropdown-item" v-for="make in filteredMakes" v-on:click="dropdownItemClickHandler">{{ make.name }}</a>
 
-  template: `<div><label for="make-select" class="form-label">make</label>
+                </div>
+            </div>
+        </div>`,
 
-      <select id="make-select" class="form-select mb-3" aria-label=".form-select-lg example">
-      <option selected>Open this select menu</option>
-      <option value="" v-for="make in makes">{{ make.name }}</option>
+        data: function() {
+            
+            
 
-    </select></div>`,
-  data: function() {
-    let makes = []
+            return {
+                makes: [],
+                filteredMakes: [],
+                userInput: ""
+            }
+        },
+        created: function() {
+            this.fetchdata()
+        },
+        methods: {
+            fetchdata() {
+                fetch("/booking/api/makes/")
+                    .then((response) => response.json())
+                    .then((response_data) => {
+                        console.log(response_data);
+                        this.makes = response_data;
+                        this.filteredMakes = response_data;
+                    });
+            },
+            inputHandler(event) {
+              this.filteredMakes = []
+              for (make of this.makes) {
+                if(make.name.toUpperCase().includes(this.userInput.toUpperCase())) {
+                  this.filteredMakes.push(make)
+                }
+              }
+            },
+            dropdownItemClickHandler(event) {
+              console.log(event.target.textContent)
+              this.filteredMakes = []
+              this.userInput = event.target.textContent
+              $('.dropdown-toggle').dropdown()
 
-    return {
-        makes: makes
-<!--          { id: 0, text: 'Opel' },-->
-<!--          { id: 1, text: 'Volkswagen' },-->
-<!--          { id: 2, text: 'FSO' }-->
 
-    }
-  },
-  created: function() {
-    this.fetchdata()
-  },
-  methods: {
-      fetchdata() {
-          fetch("/booking/api/makes/")
-                        .then((response) => response.json())
-                        .then((response_data) => {
-                            console.log("test", response_data);
-                            this.makes = response_data;
-                        });
-          }
-  }
-})
+            }
+            
+        }
+    })
 
 var app = new Vue({el:'#app'})
         </script>

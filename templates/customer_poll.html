@@ -41,7 +41,7 @@
           <input type="email" class="form-control" id="{{form.email.id_for_label}}" name="{{form.email.html_name}}">
         </div>
 
-            <div class="mb-3" id="app"><fetch-select-make></fetch-select-make></div>
+            <div class="mb-3" id="app"><fetch-select-make></fetch-select-make></div> <!--przekazac propsy z apki vue, np."items=makes"-->
 <!--        <div class="mb-3">-->
 
 <!--            {{ form.make.errors }}-->
@@ -153,7 +153,13 @@
         }
     })
 
-var app = new Vue({el:'#app'})
+var app = new Vue({
+  el:'#app',
+  data: {
+    makes: [], //fetch api musi tu zapisac dane
+    models: [],
+  }
+})
         </script>
         {% endverbatim %}
 

@@ -7,7 +7,7 @@ wellbeing, healthcare or education.
 Project is created with:
 * Python version: 3.10.8
 * Django version: 3.2.13
-* PyCharm Community Edition library version: 2022.2
+* PyCharm Community Edition version: 2022.2
 * Visual Studio Code
 * Django Rest Framework
 * Vue.js v2

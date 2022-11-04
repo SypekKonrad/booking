@@ -9,12 +9,12 @@
 <!--</head>-->
 
 <!--<body>-->
-    <div class="container">
+    <div class="container" >
 {% block title %}
     <h1>Please insert requested data</h1>
 {% endblock %}
 {% block content %}
-    <form method="post" action="{%url 'poll'%}">
+    <form method="post" action="{%url 'poll'%}" id="app">
 
 
         {% csrf_token %}
@@ -41,7 +41,7 @@
           <input type="email" class="form-control" id="{{form.email.id_for_label}}" name="{{form.email.html_name}}">
         </div>
 
-            <div class="mb-3" id="app"><fetch-select-make></fetch-select-make></div> <!--przekazac propsy z apki vue, np."items=makes"-->
+            <div class="mb-3" ><fetch-select label="make" v-bind:objects="makes"></fetch-select></div> <!--przekazac propsy z apki vue, np."items=makes"-->
 <!--        <div class="mb-3">-->
 
 <!--            {{ form.make.errors }}-->
@@ -49,11 +49,12 @@
 <!--          <input type="text" class="form-control" id="{{form.make.id_for_label}}" name="{{form.make.html_name}}">-->
 <!--        </div>-->
 
-        <div class="mb-3">
+            <div class="mb-3" ><fetch-select label="model" v-bind:objects="models"></fetch-select></div>
+        <!-- <div class="mb-3">
             {{ form.model.errors }}
           <label for="{{ form.model.id_for_label }}" class="form-label">model</label>
           <input type="text" class="form-control" id="{{form.model.id_for_label}}" name="{{form.model.html_name}}">
-        </div>
+        </div> -->
         <div class="mb-3">
             {{ form.body_type.errors }}
           <label for="{{ form.body_type.id_for_label }}" class="form-label">body type</label>
@@ -97,53 +98,47 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
         {% verbatim %}
 <script>
-    Vue.component("fetch-select-make", {
+    Vue.component("fetch-select", {
+        props: ["label", "objects"],
         template: `
         <div>
-            <label for="make-select" class="form-label">make</label>
+            <label for="object-select" class="form-label">{{ label }}</label>
             <div class="dropdown">
-                <input type="text" class="form-control dropdown-toggle" id="make-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-on:input="inputHandler" v-model="userInput" autocomplete="off"></input>
+                <input type="text" class="form-control dropdown-toggle" id="object-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-on:input="inputHandler" v-model="userInput" autocomplete="off"></input>
                 <div class="dropdown-menu" aria-labelledby="make-select">
-                    <a class="dropdown-item" v-for="make in filteredMakes" v-on:click="dropdownItemClickHandler">{{ make.name }}</a>
+                    <a class="dropdown-item" v-for="object in filteredObjects" v-on:click="dropdownItemClickHandler">{{ object.name }}</a>
 
                 </div>
             </div>
         </div>`,
 
+        created: function() {
+          this.filteredObjects = this.objects
+        },
+
         data: function() {
             
-            
-
+         
             return {
-                makes: [],
-                filteredMakes: [],
+                
+                filteredObjects: [],
                 userInput: ""
             }
         },
-        created: function() {
-            this.fetchdata()
-        },
+        
         methods: {
-            fetchdata() {
-                fetch("/booking/api/makes/")
-                    .then((response) => response.json())
-                    .then((response_data) => {
-                        console.log(response_data);
-                        this.makes = response_data;
-                        this.filteredMakes = response_data;
-                    });
-            },
+            
             inputHandler(event) {
-              this.filteredMakes = []
-              for (make of this.makes) {
-                if(make.name.toUpperCase().includes(this.userInput.toUpperCase())) {
-                  this.filteredMakes.push(make)
+              this.filteredObjects = []
+              for (object of this.objects) {
+                if(object.name.toUpperCase().includes(this.userInput.toUpperCase())) {
+                  this.filteredObjects.push(object)
                 }
               }
             },
             dropdownItemClickHandler(event) {
               console.log(event.target.textContent)
-              this.filteredMakes = []
+              this.filteredObjects = []
               this.userInput = event.target.textContent
               $('.dropdown-toggle').dropdown()
 
@@ -156,9 +151,33 @@
 var app = new Vue({
   el:'#app',
   data: {
+    
     makes: [], //fetch api musi tu zapisac dane
-    models: [],
+    models: []
+    
+    
+  },
+  created: function() {
+           
+    fetch("/booking/api/makes/")
+        .then((response) => response.json())
+        .then((response_data) => {
+            console.log(response_data);
+            this.makes = response_data;
+            
+        });
+    
+    fetch("/booking/api/models/")
+      .then((response) => response.json())
+      .then((response_data) => {
+          console.log(response_data);
+          this.models = response_data;
+          
+      });
+            
   }
+
+  
 })
         </script>
         {% endverbatim %}

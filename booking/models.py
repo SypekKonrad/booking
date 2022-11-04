@@ -31,6 +31,9 @@ class Vehicle(models.Model):
 class Make(models.Model):
     name = models.CharField(max_length=20)
 
+class Model(models.Model):
+    name = models.CharField(max_length=20)
+    make = models.ForeignKey(Make, on_delete=models.CASCADE)
 
 
 # Create your models here.

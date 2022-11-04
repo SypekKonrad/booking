@@ -15,7 +15,7 @@ urlpatterns = [
     path('poll/', views.customer_poll, name='poll'),
     path('api-auth/', include('rest_framework.urls')),
     path('api/makes/', rest_views.MakeListView.as_view(), name='make-list'),
-    path('api/models/', rest_views.MakeListView.as_view(), name='model-list'),
+    path('api/models/', rest_views.ModelListView.as_view(), name='model-list'),
 
 
 ]

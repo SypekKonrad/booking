@@ -12,6 +12,6 @@ class MakeListView(ListCreateAPIView):
     permission_classes = [AllowAny]
 
 class ModelListView(ListCreateAPIView):
-    queryset = Make.objects.all()
+    queryset = Model.objects.all()
     serializer_class = ModelSerializer
     permission_classes = [AllowAny]

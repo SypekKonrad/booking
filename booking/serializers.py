@@ -12,4 +12,4 @@ class MakeSerializer(serializers.ModelSerializer):
 class ModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Model
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'make_id']

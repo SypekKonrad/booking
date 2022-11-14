@@ -41,7 +41,7 @@
           <input type="email" class="form-control" id="{{form.email.id_for_label}}" name="{{form.email.html_name}}">
         </div>
 
-            <div class="mb-3" ><fetch-select label="make" v-bind:objects="makes"></fetch-select></div> <!--przekazac propsy z apki vue, np."items=makes"-->
+            <div class="mb-3" ><fetch-select label="make" v-bind:objects="makes" ></fetch-select></div> <!--przekazac propsy z apki vue, np."items=makes"-->
 <!--        <div class="mb-3">-->
 
 <!--            {{ form.make.errors }}-->
@@ -49,7 +49,8 @@
 <!--          <input type="text" class="form-control" id="{{form.make.id_for_label}}" name="{{form.make.html_name}}">-->
 <!--        </div>-->
 
-            <div class="mb-3" ><fetch-select label="model" v-bind:objects="models"></fetch-select></div>
+            <div class="mb-3" ><fetch-select label="model" v-bind:objects="models" ></fetch-select></div>
+            <span>asd{{make_id}}</span>
         <!-- <div class="mb-3">
             {{ form.model.errors }}
           <label for="{{ form.model.id_for_label }}" class="form-label">model</label>
@@ -57,7 +58,7 @@
         </div> -->
         <div class="mb-3">
             {{ form.body_type.errors }}
-          <label for="{{ form.body_type.id_for_label }}" class="form-label">body type</label>
+          <label for="{{ form.body_type.id_for_label }}" class="form-label" >body type</label>
           <input type="text" class="form-control" id="{{form.body_type.id_for_label}}" name="{{form.body_type.html_name}}">
         </div>
         <div class="mb-3">
@@ -99,7 +100,7 @@
         {% verbatim %}
 <script>
     Vue.component("fetch-select", {
-        props: ["label", "objects"],
+        props: ["label", "objects", ],
         template: `
         <div>
             <label for="object-select" class="form-label">{{ label }}</label>
@@ -139,6 +140,7 @@
             dropdownItemClickHandler(event) {
               console.log(event.target.textContent)
               this.filteredObjects = []
+              
               this.userInput = event.target.textContent
               $('.dropdown-toggle').dropdown()
 
@@ -153,7 +155,8 @@ var app = new Vue({
   data: {
     
     makes: [], //fetch api musi tu zapisac dane
-    models: []
+    models: [],
+    make_id: null
     
     
   },

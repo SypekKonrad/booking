@@ -9,7 +9,7 @@ services:
     volumes:
       - ./backend:/app/
     environment:
-      - DJANGO_SETTINGS_MODULE=workshop.settings_prod_docker
+      - DJANGO_SETTINGS_MODULE=workshop.settings_prod
     env_file: .env
     networks:
       - app

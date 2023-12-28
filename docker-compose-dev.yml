@@ -9,11 +9,11 @@ services:
     volumes:
       - ./backend:/app/
     environment:
-      - DJANGO_SETTINGS_MODULE=workshop.settings_dev_docker
-      - POSTGRES_DB: workshopdb
-      - POSTGRES_USER: workshopuser
-      - POSTGRES_PASSWORD: haslohaslo123
-      - POSTGRES_HOST: localhost
+      DJANGO_SETTINGS_MODULE: workshop.settings_dev_docker
+      POSTGRES_DB: workshopdb
+      POSTGRES_USER: workshopuser
+      POSTGRES_PASSWORD: haslohaslo123
+      POSTGRES_HOST: localhost
 
     ports:
       - "8000:8000"

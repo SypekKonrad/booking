@@ -22,11 +22,7 @@ services:
   db:
     image: postgres:12
     env_file: .env
-    environment:
-      POSTGRES_DB: workshopdb
-      POSTGRES_USER: workshopuser
-      POSTGRES_PASSWORD: haslohaslo123
-      POSTGRES_HOST: localhost
+
     volumes:
       - ./db:/db
 #    ports:

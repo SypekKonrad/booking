@@ -26,8 +26,6 @@ services:
       - ./db:/db
 #    ports:
 #      - "5432:5432"
-    networks:
-      - app
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "workshopdb", "-U", "workshopuser" ]
       interval: 5s

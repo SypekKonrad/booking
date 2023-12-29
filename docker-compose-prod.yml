@@ -8,8 +8,8 @@ services:
       - db
     volumes:
       - ./backend:/app/
-#    environment:
-#      DJANGO_SETTINGS_MODULE: workshop.settings_prod
+    environment:
+      DJANGO_SETTINGS_MODULE: workshop.settings_prod
 #      POSTGRES_DB: POSTGRES_DB
 #      POSTGRES_USER: POSTGRES_USER
 #      POSTGRES_PASSWORD: POSTGRES_PASSWORD

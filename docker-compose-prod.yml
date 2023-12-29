@@ -11,8 +11,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=workshop.settings_prod
     env_file: .env
-    networks:
-      - app
+
     ports:
       - "8000:8000"
     image: app:django
@@ -42,12 +41,8 @@ services:
       [ 80:80 ]
     volumes:
     - ./nginx:/nginx
-    networks:
-      - app
     depends_on:
       - app
-networks:
-  app:
-     driver: bridge
+
 
 

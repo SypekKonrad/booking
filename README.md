@@ -1,3 +1,6 @@
+hosted at:
+http://3.75.247.213/
+
 ## booking
 
 A functional RESTful web app written in Django, making your local mechanic appointment easier. It can be applied and reused in any other industries, such 

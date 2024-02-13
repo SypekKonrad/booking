@@ -27,9 +27,10 @@ class CustomerPollForm2(forms.ModelForm):
         model = Customer
         fields = ["first_name", "surname", "phone_number", "email"]
 
-
-
-
+class ContactMeForm(forms.Form):
+    email = forms.EmailField(label='e-mail', max_length=20, error_messages={'required': 'This field is required'})
+    subject = forms.CharField(label='subject', max_length=255, error_messages={'required': 'This field is required'})
+    message = forms.CharField(widget=forms.Textarea, label='message', error_messages={'required': 'This field is required'})
 
 # class CustomerPollForm(forms.Form):
 #     first_name = forms.CharField(label='First name', max_length=20, error_messages={'required': 'This field is required'})

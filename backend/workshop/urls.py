@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
     path('', index, name='index'),
+    path('contactme/', contact_me, name='contact_me'),
 
     path('register/partner/', create_partner_account, name='create_partner_account'),
     path('register/partner/success/', partner_registration_successful, name='partner_registration_successful'),
@@ -43,7 +44,6 @@ urlpatterns = [
     path('password/reset/complete/', CustomPasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
     path('email/change/', change_email, name='change_email'),
-    # path('email/change/done/', change_email, name='change_email'),
 
     path('poll/', customer_poll, name='poll'),
     path('list/', customer_list, name='customers'),
@@ -53,12 +53,6 @@ urlpatterns = [
     path('api/makes/', MakeListView.as_view(), name='make-list'),
     path('api/models/', ModelListView.as_view(), name='model-list'),
 
-    # path('register/partner/failure/', create_partner_account, name='create_partner_account'),
-    # path('activation/partner/failure/', partner_account_activation_1, name='partner_activation_1'),
 
-    # path('create_accoount_1/', create_customer_account, name='create_customer_account'),
-    # path('<int:customer_id>/customers/', views.customer_vehicle, name='vehicles'),
-    # path('api/users/', rest_views.UsersListView.as_view(), name='user-list'),
-    # path('<int:vehicle_id>/vehicles/', views.vehicles, name='vehicles'),
 ]
 

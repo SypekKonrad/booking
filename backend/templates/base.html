@@ -22,6 +22,7 @@
 				<div class="navbar-nav ml-auto">
 					{% block navbar_links %}
 					<a class="nav-item nav-link" href="{% url 'index' %}">Home</a>
+					<a class="nav-item nav-link" href="{% url 'contact_me' %}">Contact Me</a>
 
 					{% if request.user.is_authenticated %}
 					<a class="nav-item nav-link" href="{% url 'customers' %}">List of Customers</a>
@@ -48,8 +49,7 @@
 <main role="main">
 	<div class="container">
 		<h1 class="pt-2 text-center">
-{#			{% block title %}#}
-{#			{% endblock %}#}
+
 		</h1>
 		<p>
 			{% block content %}
@@ -60,14 +60,7 @@
 </main>
 
 
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>-->
-<!--<script-->
-<!--			  src="https://code.jquery.com/jquery-3.6.1.min.js"-->
-<!--			  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="-->
-<!--			  crossorigin="anonymous">-->
 
-<!--</script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>-->
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>

@@ -76,9 +76,8 @@ class CreatePartnerForm2(UserCreationForm):
         user.email = self.cleaned_data['email']
         #user.is_active = False
 
-        if commit:
-            user.save()
-            partner = Partner.objects.create(user=user, company_name=self.cleaned_data['company_name'])
+        user.save()
+        partner = Partner.objects.create(user=user, company_name=self.cleaned_data['company_name'])
 
         return user
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
 from django.views.decorators.csrf import csrf_exempt
@@ -9,7 +9,7 @@ from django.core.mail import send_mail
 def index(request):
 
     return render(request, 'index.html')
-
+@csrf_exempt
 def contact_me(request):
     form = ContactMeForm()
     if request.method == 'POST':
@@ -26,9 +26,20 @@ def contact_me(request):
             return render(request, 'contact_me_thx.html')
 
     return render(request, 'contact_me.html', {'form': form})
-@csrf_exempt
+
+
+@login_required
+def job_list(request):
+    job_list = Job.objects.exclude(jobassignment__isnull=False)
+    # print(job_list)
+
+    return render(request, 'booking/job_list.html',
+                  {'job_list': job_list})
+
+
 @login_required
 def customer_list(request):
+    #todo ten widok docelowo bedzie usuniety
     customer_list = Customer.objects.all()
     for c in customer_list:
         print(c.get_display_name())
@@ -43,8 +54,36 @@ def service_detail(request, vehicle_id):
                   {'service_detail': service_detail})
 
 
+#todo docelowo podmieic customer_poll2 na customer_poll
+def customer_poll2(request):
+    form = JobForm
+    if request.method == 'POST':
+        print(request.POST)
+        form = JobForm(request.POST)
+        print("A:", form.is_valid())
+        print(form.errors)
+        if form.is_valid():
+            job = Job.objects.create(
+                first_name=form.cleaned_data['first_name'],
+                surname=form.cleaned_data['surname'],
+                email=form.cleaned_data['email'],
+                phone_number=form.cleaned_data['phone_number'],
+                adress=form.cleaned_data['adress'],
+                city=form.cleaned_data['city'],
+                postal_code=form.cleaned_data['postal_code'],
+                make=form.cleaned_data['make'],
+                model=form.cleaned_data['model'],
+                body_type=form.cleaned_data['body_type'],
+                production_year=form.cleaned_data['production_year'],
+                fuel_type=form.cleaned_data['fuel_type'],
+                engine_displacement=form.cleaned_data['engine_displacement'],
+                transmission=form.cleaned_data['transmission'],
+                horsepower=form.cleaned_data['horsepower'],
+                service=form.cleaned_data['service'],
+            )
+            return render(request,'booking/thankyou.html', {'form': form})
 
-
+    return render(request,'booking/customer_poll.html', {'form': form})
 
 
 
@@ -82,7 +121,7 @@ def customer_poll(request):
 
             return render(request,'booking/thankyou.html', {'form1': form1, 'form2': form2})
 
-    return render(request,'booking/customer_poll.html', {'form1': form1, 'form2': form2})
+    return render(request,'booking/customer_poll.html', {'form': form1, 'form': form2})
 
 
 

@@ -8,6 +8,29 @@ class CustomerAdmin(admin.ModelAdmin):
         'email'
     ]
 
+class JobsAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'first_name',
+        'surname',
+        'email',
+        'phone_number',
+        'adress',
+        'city',
+        'postal_code',
+        'timestamp',
+        'make',
+        'model',
+        'body_type',
+        'production_year',
+        'fuel_type',
+        'engine_displacement',
+        'transmission',
+        'horsepower',
+        'service',
+    ]
+
+admin.site.register(Job,JobsAdmin)
 admin.site.register(Customer,CustomerAdmin)
 
 

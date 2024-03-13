@@ -8,79 +8,93 @@
 
 
         {% csrf_token %}
-        {{ form1.non_field_errors }}
-        {{ form2.non_field_errors }}
+        {{ form.non_field_errors }}
         <div class="mb-3">
-            {{ form1.first_name.errors }}
-          <label for="{{ form1.first_name.id_for_label }}" class="form-label">First Name</label>
-          <input type="text" class="form-control" id="{{form1.first_name.id_for_label}}" name="{{form1.first_name.html_name}}">
+            {{ form.first_name.errors }}
+          <label for="{{ form.first_name.id_for_label }}" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="{{form.first_name.id_for_label}}" name="{{form.first_name.html_name}}">
         </div>
         <div class="mb-3">
-            {{ form1.surname.errors }}
-          <label for="{{ form1.surname.id_for_label }}" class="form-label">Surname</label>
-          <input type="text" class="form-control" id="{{form1.surname.id_for_label}}" name="{{form1.surname.html_name}}">
+            {{ form.surname.errors }}
+          <label for="{{ form.surname.id_for_label }}" class="form-label">Surname</label>
+          <input type="text" class="form-control" id="{{form.surname.id_for_label}}" name="{{form.surname.html_name}}">
         </div>
         <div class="mb-3">
-            {{ form1.phone_number.errors }}
-          <label for="{{ form1.phone_number.id_for_label }}" class="form-label">phone number</label>
-          <input type="text" class="form-control" id="{{form1.phone_number.id_for_label}}" name="{{form1.phone_number.html_name}}">
+            {{ form.phone_number.errors }}
+          <label for="{{ form.phone_number.id_for_label }}" class="form-label">Phone Number</label>
+          <input type="text" class="form-control" id="{{form.phone_number.id_for_label}}" name="{{form.phone_number.html_name}}">
         </div>
         <div class="mb-3">
-            {{ form1.email.errors }}
-          <label for="{{ form1.email.id_for_label }}" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="{{form1.email.id_for_label}}" name="{{form1.email.html_name}}">
+            {{ form.email.errors }}
+          <label for="{{ form.email.id_for_label }}" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="{{form.email.id_for_label}}" name="{{form.email.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.adress.errors }}
+          <label for="{{ form.adress.id_for_label }}" class="form-label">Address</label>
+          <input type="text" class="form-control" id="{{form.adress.id_for_label}}" name="{{form.adress.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.city.errors }}
+          <label for="{{ form.city.id_for_label }}" class="form-label">City</label>
+          <input type="text" class="form-control" id="{{form.city.id_for_label}}" name="{{form.city.html_name}}">
+        </div>
+        <div class="mb-3">
+            {{ form.postal_code.errors }}
+          <label for="{{ form.postal_code.id_for_label }}" class="form-label">Postal Code</label>
+          <input type="text" class="form-control" id="{{form.postal_code.id_for_label}}" name="{{form.postal_code.html_name}}">
         </div>
 
             <div class="mb-3" ><fetch-select label="make" v-bind:objects="makes" ></fetch-select></div> <!--przekazac propsy z apki vue, np."items=makes"-->
 
 <!--        <div class="mb-3">-->
 
-<!--            {{ form2.make.errors }}-->
-<!--          <label for="{{ form.make.id_for_label }}" class="form-label">make</label>-->
+<!--            {{ form.make.errors }}-->
+<!--          <label for="{{ form.make.id_for_label }}" class="form-label">Make</label>-->
 <!--          <input type="text" class="form-control" id="{{form.make.id_for_label}}" name="{{form.make.html_name}}">-->
 <!--        </div>-->
 
             <div class="mb-3" ><fetch-select label="model" v-bind:objects="models" ></fetch-select></div>
             <span>{{make_id}}</span>
         <!-- <div class="mb-3">
-            {{ form2.model.errors }}
-          <label for="{{ form2.model.id_for_label }}" class="form-label">model</label>
-          <input type="text" class="form-control" id="{{form2.model.id_for_label}}" name="{{form2.model.html_name}}">
+            {{ form.model.errors }}
+          <label for="{{ form.model.id_for_label }}" class="form-label">model</label>
+          <input type="text" class="form-control" id="{{form.model.id_for_label}}" name="{{form.model.html_name}}">
         </div> -->
         <div class="mb-3">
-            {{ form2.body_type.errors }}
-          <label for="{{ form2.body_type.id_for_label }}" class="form-label" >body type</label>
-          <input type="text" class="form-control" id="{{form2.body_type.id_for_label}}" name="{{form2.body_type.html_name}}">
+            {{ form.body_type.errors }}
+          <label for="{{ form.body_type.id_for_label }}" class="form-label">Body Type</label>
+          <input type="text" class="form-control" id="{{form.body_type.id_for_label}}" name="{{form.body_type.html_name}}">
         </div>
         <div class="mb-3">
-            {{ form2.production_year.errors }}
-          <label for="{{ form2.production_year.id_for_label }}" class="form-label">production year</label>
-          <input type="number" class="form-control" id="{{form2.production_year.id_for_label}}" name="{{form2.production_year.html_name}}">
+            {{ form.production_year.errors }}
+          <label for="{{ form.production_year.id_for_label }}" class="form-label">Production Year</label>
+          <input type="number" class="form-control" id="{{form.production_year.id_for_label}}" name="{{form.production_year.html_name}}">
         </div>
         <div class="mb-3">
-            {{ form2.fuel_type.errors }}
-          <label for="{{ form2.fuel_type.id_for_label }}" class="form-label">fuel type</label>
-          <input type="text" class="form-control" id="{{form2.fuel_type.id_for_label}}" name="{{form2.fuel_type.html_name}}">
+            {{ form.fuel_type.errors }}
+          <label for="{{ form.fuel_type.id_for_label }}" class="form-label">Fuel Type</label>
+          <input type="text" class="form-control" id="{{form.fuel_type.id_for_label}}" name="{{form.fuel_type.html_name}}">
         </div>
         <div class="mb-3">
-            {{ form2.engine_displacement.errors }}
-          <label for="{{ form.engine_displacement.id_for_label }}" class="form-label">engine displacement</label>
-          <input type="number" class="form-control" id="{{form2.engine_displacement.id_for_label}}" name="{{form2.engine_displacement.html_name}}" >
+            {{ form.engine_displacement.errors }}
+          <label for="{{ form.engine_displacement.id_for_label }}" class="form-label">Engine Displacement</label>
+          <input type="number" class="form-control" id="{{form.engine_displacement.id_for_label}}" name="{{form.engine_displacement.html_name}}" >
         </div>
         <div class="mb-3">
-            {{ form2.transmission.errors }}
-          <label for="{{ form2.transmission.id_for_label }}" class="form-label">transmission</label>
-          <input type="text" class="form-control" id="{{form2.transmission.id_for_label}}" name="{{form2.transmission.html_name}}">
+            {{ form.transmission.errors }}
+          <label for="{{ form.transmission.id_for_label }}" class="form-label">Transmission</label>
+          <input type="text" class="form-control" id="{{form.transmission.id_for_label}}" name="{{form.transmission.html_name}}">
         </div>
         <div class="mb-3">
-            {{ form2.horsepower.errors }}
-          <label for="{{ form2.horsepower.id_for_label }}" class="form-label">horsepower</label>
-          <input type="number" class="form-control" id="{{form2.horsepower.id_for_label}}" name="{{form2.horsepower.html_name}}" >
+            {{ form.horsepower.errors }}
+          <label for="{{ form.horsepower.id_for_label }}" class="form-label">Horsepower</label>
+          <input type="number" class="form-control" id="{{form.horsepower.id_for_label}}" name="{{form.horsepower.html_name}}" >
         </div>
         <div class="mb-3">
-            {{ form2.service.errors }}
-          <label for="{{ form2.service.id_for_label }}" class="form-label">service</label>
-          <input type="text" class="form-control" id="{{form2.service.id_for_label}}" name="{{form2.service.html_name}}">
+            {{ form.service.errors }}
+          <label for="{{ form.service.id_for_label }}" class="form-label">Service</label>
+          <input type="text" class="form-control" id="{{form.service.id_for_label}}" name="{{form.service.html_name}}">
         </div>
 
         <button type="submit" class="btn">Send</button>

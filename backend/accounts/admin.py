@@ -8,6 +8,10 @@ class PartnerInline(admin.StackedInline):
     can_delete = False
     verbose_name_plural = 'Partner'
 
+class PartnersAdmin(admin.ModelAdmin):
+    list_display = ('user', 'company_name', 'active_job')
+
+
 class CustomUserAdmin(BaseUserAdmin):
     inlines = (PartnerInline, )
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'get_company_name')
@@ -19,3 +23,4 @@ class CustomUserAdmin(BaseUserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(Partner, PartnersAdmin)

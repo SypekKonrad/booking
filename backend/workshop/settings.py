@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-o#7#-=n@r4hk*zgg3u0(s(*z+b8tx60_q@++yj@&yh0-jf@zdr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -89,7 +89,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'workshop.wsgi.application'
 
-#gmail smtp pass toihfnuxqgzvfcjw
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -139,6 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

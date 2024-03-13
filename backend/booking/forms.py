@@ -32,6 +32,24 @@ class ContactMeForm(forms.Form):
     subject = forms.CharField(label='subject', max_length=255, error_messages={'required': 'This field is required'})
     message = forms.CharField(widget=forms.Textarea, label='message', error_messages={'required': 'This field is required'})
 
+class JobForm(forms.Form):
+    first_name = forms.CharField(label='First name', max_length=20, error_messages={'required': 'This field is required'})
+    surname = forms.CharField(label='Surname', max_length=20, error_messages={'required': 'This field is required'})
+    email = forms.EmailField(label='e-mail',  error_messages={'required': 'This field is required'})
+    phone_number = forms.CharField(label='phone number', max_length=9, error_messages={'required': 'This field is required'})
+    adress = forms.CharField(label='Adress', max_length=20, error_messages={'required': 'This field is required'})
+    city = forms.CharField(label='City', max_length=20, error_messages={'required': 'This field is required'})
+    postal_code = forms.CharField(label='Postal Code', max_length=20, error_messages={'required': 'This field is required'})
+    make = forms.CharField(label='Make', max_length=20)#, error_messages={'required': 'This field is required'})
+    model = forms.CharField(label='Model', max_length=30)#, error_messages={'required': 'This field is required'})
+    body_type = forms.CharField(label='Body Type', max_length=15, error_messages={'required': 'This field is required'})
+    production_year = forms.IntegerField(label='Production Year', error_messages={'required': 'This field is required'})
+    fuel_type = forms.CharField(label='Fuel Type', max_length=20, error_messages={'required': 'This field is required'})
+    engine_displacement = forms.IntegerField(label='Engine Displacement', error_messages={'required': 'This field is required'})
+    transmission = forms.CharField(label='Transmission', max_length=20, error_messages={'required': 'This field is required'})
+    horsepower = forms.IntegerField(label='Horsepower', error_messages={'required': 'This field is required'})
+    service = forms.CharField(label='Service', widget=forms.Textarea, error_messages={'required': 'This field is required'})
+
 # class CustomerPollForm(forms.Form):
 #     first_name = forms.CharField(label='First name', max_length=20, error_messages={'required': 'This field is required'})
 #     surname = forms.CharField(label='Surname', max_length=20, error_messages={'required': 'This field is required'})

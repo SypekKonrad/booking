@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+# from accounts.models import Partner
 
 class Customer(models.Model):
     first_name = models.CharField(max_length=20)
@@ -35,5 +36,22 @@ class Model(models.Model):
     name = models.CharField(max_length=20)
     make = models.ForeignKey(Make, on_delete=models.CASCADE)
 
+class Job(models.Model):
+    first_name = models.CharField(max_length=20)
+    surname = models.CharField(max_length=20)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=9, blank=True)
+    adress = models.CharField(max_length=20)
+    city = models.CharField(max_length=20)
+    postal_code = models.CharField(max_length=20)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    make = models.CharField(max_length=20)
+    model = models.CharField(max_length=20)
+    body_type = models.CharField(max_length=20)
+    production_year = models.SmallIntegerField()
+    fuel_type = models.CharField(max_length=20)
+    engine_displacement = models.SmallIntegerField()
+    transmission = models.CharField(max_length=20)
+    horsepower = models.SmallIntegerField()
+    service = models.TextField(blank=True)
 
-# Create your models here.

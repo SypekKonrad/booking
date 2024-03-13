@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %} Job Assigned {% endblock %}
+
+{% block content %}
+    <p>You just picked a job!</p>
+    <div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th scope="row">Service</th>
+                    <td>{{ job.service }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Vehicle</th>
+                    <td>{{ job.make }} {{ job.model }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Body Type</th>
+                    <td> {{ job.body_type }} </td>
+                </tr>
+                <tr>
+                    <th scope="row">Production Year</th>
+                    <td>{{ job.production_year }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Fuel Type </th>
+                    <td>{{ job.fuel_type }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Engine Displacement</th>
+                    <td>{{ job.engine_displacement }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Transmission</th>
+                    <td>{{ job.transmission }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Horsepower</th>
+                    <td>{{ job.horsepower }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Adress</th>
+                    <td>{{ job.postal_code }} {{ job.city }} {{ job.adress }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Customer</th>
+                    <td>{{ job.first_name }} {{ job.surname }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Phone Number</th>
+                    <td>{{ job.phone_number }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">E-mail</th>
+                    <td>{{ job.email }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

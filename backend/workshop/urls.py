@@ -20,6 +20,7 @@ from django.contrib.auth.views import LogoutView
 from booking.views import *
 from booking.rest_views import *
 from accounts.views import *
+from job_management.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -45,9 +46,19 @@ urlpatterns = [
 
     path('email/change/', change_email, name='change_email'),
 
-    path('poll/', customer_poll, name='poll'),
-    path('list/', customer_list, name='customers'),
-    path('details/<int:vehicle_id>', service_detail, name='details'),
+    # urle do zlecen
+    # todo usunac tego polla
+    # path('poll/', customer_poll, name='poll'),
+    # todo zmienic customer_poll2 na customer_poll
+    path('poll/', customer_poll2, name='poll'),
+    # todo customer list chyba tez do usuniecia
+    # path('list/', customer_list, name='customers'),
+    path('job_list/', job_list, name='job_list'),
+    path('job_management/', job_management, name='job_management'),
+    path('job_assigned/<int:id>', job_assigned, name='job_assigned'),
+
+    # todo nie wiem czy to zostawie
+    # path('details/<int:vehicle_id>', service_detail, name='details'),
 
     path('api-auth/', include('rest_framework.urls')),
     path('api/makes/', MakeListView.as_view(), name='make-list'),

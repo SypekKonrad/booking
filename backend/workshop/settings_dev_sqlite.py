@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'booking.apps.BookingConfig',
     'accounts.apps.AccountsConfig',
+    'job_management.apps.JobManagementConfig',
 
 ]
 
@@ -88,7 +89,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'workshop.wsgi.application'
 
-#gmail smtp pass toihfnuxqgzvfcjw
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

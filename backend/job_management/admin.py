@@ -7,6 +7,8 @@ class JobAssignmentAdmin(admin.ModelAdmin):
         'mechanic',
         'job',
         'assigned_at'
+        # 'is_finished'
+        # 'finished_at'
     ]
 
 admin.site.register(JobAssignment,JobAssignmentAdmin)

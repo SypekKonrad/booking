@@ -9,5 +9,7 @@ class JobAssignment(models.Model):
     mechanic = models.ForeignKey(Partner, on_delete=models.CASCADE)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     assigned_at = models.DateTimeField(auto_now_add=True)
+    is_finished = models.BooleanField(default=False)
+    finished_at = models.DateTimeField(null=True, blank=True)
 
 

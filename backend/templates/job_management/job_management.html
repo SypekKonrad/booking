@@ -5,10 +5,20 @@
     <script>
 
         function setSubmitAction(action) {
-            console.log('Setting submit action:', action);
-            document.getElementById('submit_action').value = action;
-            console.log('submit_action value:', document.getElementById('submit_action').value);
-            document.forms[0].submit();
+          let modals = [
+              document.getElementById('exampleModal'),
+              document.getElementById('exampleModal2')
+          ];
+
+          modals.forEach(function(modal) {
+            modal.addEventListener('click', function() {
+              event.preventDefault();
+              document.getElementById('submit_action').value = action;
+              document.getElementById('form').submit();
+              console.log('action', action, 'modal:', modal.id)
+            });
+          });
+
         }
 
     </script>
@@ -27,119 +37,124 @@
 
     <div class="tab-content">
       <div class="tab-pane fade show active" id="tab1">
-         3 oddzielne tabelki, veh, customer, address, jakis textfield z service, guziki odrzuc/zakoncz, przemyslec jak z fakturowaniem i platnoscia
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Service</th>
-              <th scope="col">Added at:</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{ service }}</td>
-              <td>{{ timestamp }}</td>
-            </tr>
-          </tbody>
-        </table>
+        {% if no_active_job %}
+          <p>No active job assignments.</p>
+        {% else %}
+          3 oddzielne tabelki, veh, customer, address, jakis textfield z service, guziki odrzuc/zakoncz, przemyslec jak z fakturowaniem i platnoscia
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Service</th>
+                <th scope="col">Added at:</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ service }}</td>
+                <td>{{ timestamp }}</td>
+              </tr>
+            </tbody>
+          </table>
 
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Vehicle</th>
-              <th scope="col">Body Type</th>
-              <th scope="col">Production Year</th>
-              <th scope="col">Fuel Type</th>
-              <th scope="col">Engine Displacement</th>
-              <th scope="col">Transmission</th>
-              <th scope="col">Horsepower</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{ make }} {{ model }}</td>
-              <td>{{ body_type }}</td>
-              <td>{{ production_year }}</td>
-              <td>{{ fuel_type }}</td>
-              <td>{{ engine_displacement }}</td>
-              <td>{{ transmission }}</td>
-              <td>{{ horsepower }}</td>
-            </tr>
-          </tbody>
-        </table>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Vehicle</th>
+                <th scope="col">Body Type</th>
+                <th scope="col">Production Year</th>
+                <th scope="col">Fuel Type</th>
+                <th scope="col">Engine Displacement</th>
+                <th scope="col">Transmission</th>
+                <th scope="col">Horsepower</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ make }} {{ model }}</td>
+                <td>{{ body_type }}</td>
+                <td>{{ production_year }}</td>
+                <td>{{ fuel_type }}</td>
+                <td>{{ engine_displacement }}</td>
+                <td>{{ transmission }}</td>
+                <td>{{ horsepower }}</td>
+              </tr>
+            </tbody>
+          </table>
 
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Adress</th>
-              <th scope="col">Phone Number</th>
-              <th scope="col">Customer</th>
-              <th scope="col">Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{ postal_code }} {{ city }} {{ adress }}</td>
-              <td>{{ phone_number }}</td>
-              <td>{{ first_name }} {{ surname }}</td>
-              <td>{{ email }}</td>
-            </tr>
-          </tbody>
-        </table>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Adress</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ postal_code }} {{ city }} {{ adress }}</td>
+                <td>{{ phone_number }}</td>
+                <td>{{ first_name }} {{ surname }}</td>
+                <td>{{ email }}</td>
+              </tr>
+            </tbody>
+          </table>
 
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Cancel Assignment</button>
-        <button type="button" class="btn btn-primary">Invoice</button>
-        <button type="button" class="btn btn-primary">Payment</button>
-{#        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Cancel Assignment</button>#}
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">Finish Assignment</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Cancel Assignment</button>
+          <button type="button" class="btn btn-primary">Invoice</button>
+          <button type="button" class="btn btn-primary">Payment</button>
+  {#        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Cancel Assignment</button>#}
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">Finish Assignment</button>
 
-{#        modal do odrzucenia pracy#}
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cancel Assignment</h5>
-              </div>
-              <div class="modal-body">
-                <p>Are you sure?</p>
-              </div>
-              <div class="modal-footer">
 
-                <form action="{% url 'job_management' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="submit_action" id="submit_action" value="">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="submit" name="cancel" class="btn btn-danger" onclick="setSubmitAction('cancel')">Yes</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+  {#        modal do odrzucenia pracy#}
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Cancel Assignment</h5>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure?</p>
+                </div>
+                <div class="modal-footer">
 
-{#        modal do zakończenia pracy#}
-        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Finish Assignment</h5>
-              </div>
-              <div class="modal-body">
-                <p>Are you sure?</p>
-              </div>
-              <div class="modal-footer">
-
-                <form action="{% url 'job_management' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="submit_action" id="submit_action" value="">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="submit" name="finish" class="btn btn-success" onclick="setSubmitAction('finish')">Yes</button>
-                </form>
+                  <form id="form" action="{% url 'job_management' %}" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="submit_action" id="submit_action" value="">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                      <button type="submit" name="cancel" class="btn btn-danger" onclick="setSubmitAction('cancel')">Yes</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
+  {#        modal do zakończenia pracy#}
+          <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Finish Assignment</h5>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure?</p>
+                </div>
+                <div class="modal-footer">
 
+                  <form id="form" action="{% url 'job_management' %}" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="submit_action" id="submit_action" value="">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                      <button type="submit" name="finish" class="btn btn-success" onclick="setSubmitAction('finish')">Yes</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- tu jest koniec  -->
+        {% endif %}
       </div>
       <div class="tab-pane fade" id="tab2">
         Content for the second tab goes here.

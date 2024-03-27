@@ -10,7 +10,7 @@ Key Features
 * Bootstrap-Powered Frontend: The frontend is designed with Bootstrap, providing a responsive and visually appealing interface for users to interact with the platform.
 
 ## Technology Stack
-* Backend: Django web framework 
+* Backend: Django  
 * Containerization: Docker
 * Cloud Hosting: AWS
   

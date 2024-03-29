@@ -45,7 +45,7 @@ class JobForm(forms.Form):
     body_type = forms.CharField(label='Body Type', max_length=15, error_messages={'required': 'This field is required'})
     production_year = forms.IntegerField(label='Production Year', error_messages={'required': 'This field is required'})
     fuel_type = forms.CharField(label='Fuel Type', max_length=20, error_messages={'required': 'This field is required'})
-    engine_displacement = forms.IntegerField(label='Engine Displacement', error_messages={'required': 'This field is required'})
+    engine_displacement = forms.FloatField(label='Engine Displacement', error_messages={'required': 'This field is required'})
     transmission = forms.CharField(label='Transmission', max_length=20, error_messages={'required': 'This field is required'})
     horsepower = forms.IntegerField(label='Horsepower', error_messages={'required': 'This field is required'})
     service = forms.CharField(label='Service', widget=forms.Textarea, error_messages={'required': 'This field is required'})

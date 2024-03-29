@@ -50,8 +50,7 @@ class Job(models.Model):
     body_type = models.CharField(max_length=20)
     production_year = models.SmallIntegerField()
     fuel_type = models.CharField(max_length=20)
-    engine_displacement = models.SmallIntegerField()
+    engine_displacement = models.FloatField()
     transmission = models.CharField(max_length=20)
     horsepower = models.SmallIntegerField()
     service = models.TextField(blank=True)
-

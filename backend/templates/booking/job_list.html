@@ -10,14 +10,16 @@
       <thead>
         <tr>
           <th scope="col">#</th>
+          <th scope="col">Pick the Job</th>
           <th scope="col">Vehicle</th>
           <th scope="col">Service</th>
           <th scope="col">Adress</th>
           <th scope="col">Map</th>
           <th scope="col">Phone Number</th>
           <th scope="col">Name</th>
-          <th scope="col">Pick the Job</th>
           <th scope="col">Added at:</th>
+          <th scope="col">Details</th>
+
         </tr>
       </thead>
       <tbody>
@@ -25,15 +27,18 @@
             {% if job  %}
         <tr>
           <th scope="row">{{ forloop.counter }}</th>
-          <td>{{job.make}}, {{job.model}}, {{job.fuel_type}}</td>
+          <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ job.id }}">Pick</button></td>
+          <td>{{job.make}}, {{job.model}}, {{job.engine_displacement}}, {{job.fuel_type}}</td>
           <td>{{job.service}}</td>
-          <td>{{job.city}}, {{job.adress}}, {{job.postal_code}}</td>
+          <td>{{job.city}}, {{job.adress}}, {{job.postal_code}}</td>              <!-- uporzadkowac tebelke, zrobic full details do job_list i job_management, job_management bedzie moze mial statusy platnosci i faktury? -->
+
 {#          <td><button type="button" class="btn btn-primary">Map</button></td>#}
           <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">Map</button></td>
           <td>{{job.phone_number}}</td>
           <td>{{job.first_name}}, {{job.surname}}</td>
-          <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ job.id }}">Pick</button></td>
           <td>{{job.timestamp}}</td>
+          <!-- <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ job.id }}">Show</button></td> -->
+          <td><a href="{% url 'job_details' job.id %}" class="btn btn-primary">Show</a></td>
         </tr>
         {#modal z pracą#}
         <div class="modal fade" id="exampleModal{{ job.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

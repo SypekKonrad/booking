@@ -30,9 +30,7 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#tab2">Finished</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#tab3">Rejected</a>
-      </li>
+
     </ul>
 
     <div class="tab-content">
@@ -40,7 +38,6 @@
         {% if no_active_job %}
           <p>No active job assignments.</p>
         {% else %}
-          3 oddzielne tabelki, veh, customer, address, jakis textfield z service, guziki odrzuc/zakoncz, przemyslec jak z fakturowaniem i platnoscia
           <table class="table">
             <thead>
               <tr>
@@ -103,7 +100,6 @@
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Cancel Assignment</button>
           <button type="button" class="btn btn-primary">Invoice</button>
           <button type="button" class="btn btn-primary">Payment</button>
-  {#        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Cancel Assignment</button>#}
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">Finish Assignment</button>
 
 
@@ -157,14 +153,46 @@
         {% endif %}
       </div>
       <div class="tab-pane fade" id="tab2">
-        Content for the second tab goes here.
-          {% for job in finished_job_assignments %}
+        <!-- tu jest początek tab2 -->
+        <div style='margin-top:10px;'>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Vehicle</th>
+                <th scope="col">Service</th>
+                <th scope="col">Adress</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Finished at:</th>
+                <th scope="col">Invoice</th>
+                <th scope="col">Payment</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for job in finished_job_assignments %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{job.job.make}}, {{job.job.model}}, {{job.job.engine_displacement}}, {{job.job.fuel_type}}</td>
+                <td>{{job.job.service}}</td>
+                <td>{{job.job.city}}, {{job.job.adress}}, {{job.job.postal_code}}</td>
+                <td>{{job.job.first_name}}, {{job.job.surname}}</td>
+                <td>{{job.job.phone_number}}</td>
+                <!-- <td>{{job.job.timestamp}}</td> -->
+                <td>{{job.finished_at}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+          <!-- {% for job in finished_job_assignments %}
               <p>{{ job }}</p>
-          {% endfor %}
+          {% endfor %} -->
+          <!-- tu jest koniec tab2 -->
+
       </div>
-{#      <div class="tab-pane fade" id="tab3">#}
-{#        Content for the third tab goes here.#}
-{#      </div>#}
+
     </div>
 
 {% endblock %}

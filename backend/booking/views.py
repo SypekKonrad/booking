@@ -7,8 +7,9 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 def index(request):
-
     return render(request, 'index.html')
+
+
 @csrf_exempt
 def contact_me(request):
     form = ContactMeForm()

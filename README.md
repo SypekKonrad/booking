@@ -1,5 +1,5 @@
 hosted at:
-http://3.75.247.213/
+
 
 ## Mobile Mechanic Assistance Platform
 

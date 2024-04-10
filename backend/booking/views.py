@@ -122,7 +122,7 @@ def customer_poll(request):
 
             return render(request,'booking/thankyou.html', {'form1': form1, 'form2': form2})
 
-    return render(request,'booking/customer_poll.html', {'form': form1, 'form': form2})
+    return render(request,'booking/customer_poll.html', {'form1': form1, 'form2': form2})
 
 
 

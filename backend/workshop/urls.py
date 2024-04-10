@@ -55,7 +55,14 @@ urlpatterns = [
     # path('list/', customer_list, name='customers'),
     path('job_list/', job_list, name='job_list'),
     path('job_management/', job_management, name='job_management'),
+    path('job_management/details/<int:id>', job_details, name='job_details'),
     path('job_assigned/<int:id>', job_assigned, name='job_assigned'),
+    path('invoices/', invoice_management_panel, name='invoice_management_panel'),
+    path('invoices/new/', invoice_gen, name='invoice_gen'),
+
+    # path('job_assigned/invoices/invoice/new>', invoice_gen, name='invoice_gen'),
+
+
 
     # todo nie wiem czy to zostawie
     # path('details/<int:vehicle_id>', service_detail, name='details'),

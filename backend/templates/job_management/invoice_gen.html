@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block title %} New Invoice {% endblock %}
+
+{% block content %}
+
+
+        <div>
+            <a href="{% url 'invoice_management_panel' %}">
+                <button type="button" class="btn btn-primary">Return</button>
+            </a>
+        </div>
+
+    <div>
+
+        <h1>New Invoice</h1>
+
+        <form method="post" action="{% url 'invoice_gen' %}">
+            {% csrf_token %}
+            {{ invoice_form.non_field_errors }}
+            {{ item_formset.management_form }}
+             <div>
+
+                 <div class="mb-3">
+                    {{ invoice_form.company_name.errors }}
+                    <label for="{{ invoice_form.company_name.id_for_label }}" class="form-label">Company Name</label>
+                    <input type="text" class="form-control" id="{{invoice_form.company_name.id_for_label}}" name="{{invoice_form.company_name.html_name}}">
+                </div>
+
+                 <div class="mb-3">
+                    {{ invoice_form.tax_identification_number.errors }}
+                    <label for="{{ invoice_form.tax_identification_number.id_for_label }}" class="form-label">Tax Identification Number</label>
+                    <input type="text" class="form-control" id="{{invoice_form.tax_identification_number.id_for_label}}" name="{{invoice_form.tax_identification_number.html_name}}">
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.invoice_number.errors }}
+                    <label for="{{ invoice_form.invoice_number.id_for_label }}" class="form-label">Invoice Number</label>
+                    <input type="text" class="form-control" id="{{invoice_form.invoice_number.id_for_label}}" name="{{invoice_form.invoice_number.html_name}}">
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.date_of_issue.errors }}
+                    <label for="{{ invoice_form.date_of_issue.id_for_label }}" class="form-label">Date of Issue</label>
+                    <input type="datetime-local" class="form-control" id="{{invoice_form.date_of_issue.id_for_label}}" name="{{invoice_form.date_of_issue.html_name}}">
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.place_of_issue.errors }}
+                    <label for="{{ invoice_form.place_of_issue.id_for_label }}" class="form-label">Place of Issue</label>
+                    <input type="text" class="form-control" id="{{invoice_form.place_of_issue.id_for_label}}" name="{{invoice_form.place_of_issue.html_name}}">
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.buyer.errors }}
+                    <label for="{{ invoice_form.buyer.id_for_label }}" class="form-label">Buyer</label>
+                    <input type="text" class="form-control" id="{{invoice_form.buyer.id_for_label}}" name="{{invoice_form.buyer.html_name}}">
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.email.errors }}
+                    <label for="{{ invoice_form.email.id_for_label }}" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="{{invoice_form.email.id_for_label}}" name="{{invoice_form.email.html_name}}">
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.street.errors }}
+                    <label for="{{ invoice_form.street.id_for_label }}" class="form-label">Street</label>
+                    <input type="text" class="form-control" id="{{invoice_form.street.id_for_label}}" name="{{invoice_form.street.html_name}}">
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.postal_code.errors }}
+                    <label for="{{ invoice_form.postal_code.id_for_label }}" class="form-label">Postal Code</label>
+                    <input type="text" class="form-control" id="{{invoice_form.postal_code.id_for_label}}" name="{{invoice_form.postal_code.html_name}}">
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.city.errors }}
+                    <label for="{{ invoice_form.city.id_for_label }}" class="form-label">City</label>
+                    <input type="text" class="form-control" id="{{invoice_form.city.id_for_label}}" name="{{invoice_form.city.html_name}}">
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.total.errors }}
+                    <label for="{{ invoice_form.total.id_for_label }}" class="form-label">Total</label>
+                    <input type="text" class="form-control" id="{{invoice_form.total.id_for_label}}" name="{{invoice_form.total.html_name}}">
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.iban.errors }}
+                    <label for="{{ invoice_form.iban.id_for_label }}" class="form-label">IBAN</label>
+                    <input type="text" class="form-control" id="{{invoice_form.iban.id_for_label}}" name="{{invoice_form.iban.html_name}}">
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.payment_status.errors }}
+                    <label for="{{ invoice_form.payment_status.id_for_label }}" class="form-label">Payment Status</label>
+                    <select class="form-select" id="{{invoice_form.payment_status.id_for_label}}" name="{{invoice_form.payment_status.html_name}}">
+                        {% for value, label in invoice_form.payment_status.field.choices %}
+                            <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    {{ invoice_form.payment_method.errors }}
+                    <label for="{{ invoice_form.payment_method.id_for_label }}" class="form-label">Payment Method</label>
+                    <select class="form-select" id="{{invoice_form.payment_method.id_for_label}}" name="{{invoice_form.payment_method.html_name}}">
+                        {% for value, label in invoice_form.payment_method.field.choices %}
+                            <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                  {% for item_form in item_formset %}
+                    <div class="mb-3">
+
+                      {% if item_form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                          <ul>
+                            {% for error in item_form.non_field_errors %}
+                              <li>{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                      {% endif %}
+
+                      <div class="mb-3">
+                        {{ item_form.item.errors }}
+                        <label for="{{ item_form.item.id_for_label }}" class="form-label">Item</label>
+                        <input type="text" class="form-control" id="{{ item_form.item.id_for_label }}" name="{{ item_form.item.html_name }}">
+                      </div>
+
+                      <div class="mb-3">
+                        {{ item_form.quantity.errors }}
+                        <label for="{{ item_form.quantity.id_for_label }}" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="{{ item_form.quantity.id_for_label }}" name="{{ item_form.quantity.html_name }}">
+                      </div>
+
+                        <div class="mb-3">
+                            {{ item_form.price.errors }}
+                            <label for="{{ item_form.price.id_for_label }}" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="{{ item_form.price.id_for_label }}" name="{{ item_form.price.html_name }}">
+                        </div>
+
+                        <div class="mb-3">
+                            {{ item_form.subtotal.errors }}
+                            <label for="{{ item_form.subtotal.id_for_label }}" class="form-label">Subtotal</label>
+                            <input type="number" class="form-control" id="{{ item_form.subtotal.id_for_label }}" name="{{ item_form.subtotal.html_name }}">
+                        </div>
+
+                    </div>
+                  {% endfor %}
+
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+{% endblock %}

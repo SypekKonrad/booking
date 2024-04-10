@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} Invoices {% endblock %}
+
+{% block content %}
+    <div style='margin-top:10px;'>
+
+        <div>
+            <a href="{% url 'invoice_gen' %}">
+                <button type="button" class="btn btn-primary">New</button>
+            </a>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Added at:</th>
+                    <th scope="col">Issued at:</th>
+                    <th scope="col">Customer</th>
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+{% endblock %}

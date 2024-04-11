@@ -5,7 +5,8 @@ from django.forms import formset_factory, inlineformset_factory
 class InvoiceForm(forms.ModelForm):
     class Meta:
         model = Invoice
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ['mechanic']
 
 class InvoiceItemForm(forms.ModelForm):
     class Meta:
